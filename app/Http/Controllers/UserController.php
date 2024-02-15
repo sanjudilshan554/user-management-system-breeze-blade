@@ -19,8 +19,17 @@ class UserController extends Controller
         return $response;
     }
 
-    public function get(){
-        $users=$this->user->all();
+    public function get(Request $request){
+        $sortBy = $request->input('sortBy', 'username');
+
+        $users=$this->user->orderBy($sortBy)->get();
         return response()->json($users);
+    }
+
+    public function delete(Request $request){
+
+        $id=$request->userId;
+
+        $this->user->where('id',$id)->delete();
     }
 }
