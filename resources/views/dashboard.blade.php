@@ -32,11 +32,54 @@
 </div>
 
 
+<table id="userDataTable">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>id</th>
+        <th>name</th>
+        <th>email</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+   
+    </tbody>
+ 
+</table>
+
 @endsection
 
 @section('script')
 <script type="text/javascript">
+
     $(document).ready(function(){
+
+        // fetch user data
+        $.ajax({
+            url:"{{ route('user.get') }}",
+            type:"GET",
+            success:function (response){
+                var tableBody = $("#userDataTable tbody");
+                tableBody.empty();//clear rows
+
+                $.each(response, function(index, user){
+                    var row = '<tr>' +
+                                '<td>'+ (++index)+ '</td>' +
+                                '<td>'+ user.id + '</td>' +
+                                '<td>'+ user.name + '</td>' +
+                                '<td>'+ user.email + '</td>' +
+                               '</tr>';
+                    tableBody.append(row);
+                });
+            },
+            error:function(xhr, status, error){
+                console.error(error); 
+            }
+        });
+
+        // form submision
         $("#dashboard").validate({
             rules:{
                 name:{

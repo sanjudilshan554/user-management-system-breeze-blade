@@ -18,4 +18,9 @@ class UserController extends Controller
         $response= $this->user->create($request->all());
         return $response;
     }
+
+    public function get(){
+        $users=$this->user->all();
+        return response()->json($users);
+    }
 }

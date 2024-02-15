@@ -14,9 +14,8 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::post('/store',[UserController::class,'store'])->name('dashboard');
-
-
+Route::post('/store',[UserController::class,'store'])->name('user.store');
+Route::get('/get',[UserController::class,'get'])->name('user.get');
 Route::get('/', function () {
     return view('welcome');
 });
