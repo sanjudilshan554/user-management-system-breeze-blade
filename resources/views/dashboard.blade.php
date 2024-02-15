@@ -163,9 +163,10 @@
                     console.error(error);
                 }
             });
+        });
 
-            // form submision
-            $("#dashboard").validate({
+        // form submision
+        $("#dashboard").validate({
                 rules: {
                     name: {
                         required: true
@@ -228,12 +229,12 @@
                             $('#submit').html('Submit');
                             $('#submit').attr('disabled', false);
                             alert('Ajax form has been submitted successfully');
+                            fetchUserData();
                             document.getElementById('dashboard').rest();
                         }
                     });
                 }
             });
-        });
     });
 
 </script>
