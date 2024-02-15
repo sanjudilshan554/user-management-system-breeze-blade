@@ -8,11 +8,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<body>
-<div class="container">
-    @yield('content')
-</div>
- 
+    <div class="min-h-screen bg-gray-100 ">
+        @include('layouts.navigation')
+        <div class="container">
+            @yield('content')
+        </div>
+    </div>
 @yield('script')
 </body>
 </html>

@@ -9,6 +9,7 @@
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
+
         <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
@@ -16,6 +17,25 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
+        <div class="mt-4">
+            <x-input-label for="username" :value="__('username')" />
+            <x-text-input id="username" class="block mt-1 w-full" type="username" name="username" :value="old('username')" required autocomplete="username" />
+            <x-input-error :messages="$errors->get('username')" class="mt-2" />
+        </div>
+
+        <div class="mt-4">
+            <x-input-label for="usertype" :value="__('usertype')" />
+            <div class="block mt-1 w-full">
+                <label for="usertype" class="block font-medium text-sm text-gray-700">User Type</label>
+                <select id="usertype" name="usertype" class="form-select mt-1 block w-full">
+                    <option value="admin">Admin</option>
+                    <option value="superadmin">Super Admin</option>
+                    <option value="guest">Guest</option>
+                </select>
+            </div>
+            <x-input-error :messages="$errors->get('usertype')" class="mt-2" />
+        </div>
+        
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
