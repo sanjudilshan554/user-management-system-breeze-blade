@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -12,6 +13,14 @@ use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
 {
+
+    protected $user;
+
+    public function __construct(){
+        $this->user = new User();
+    }
+
+
     /**
      * Display the login view.
      */
@@ -23,13 +32,33 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(LoginRequest $request)
     {
-        $request->authenticate();
 
-        $request->session()->regenerate();
+        // $request->authenticate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        //         $request->session()->regenerate();
+
+        //         return redirect()->intended(RouteServiceProvider::HOME);
+    
+        $user = $this->user->where('email', $request->email)->first();
+
+        if($user){
+            $user_type= $user->user_type;
+
+            if($user_type == 'admin' || $user_type == 'superadmin'){
+                $request->authenticate();
+
+                $request->session()->regenerate();
+
+                return redirect()->intended(RouteServiceProvider::HOME);
+            }else{
+                return view('welcome');
+            }
+        }else{
+            return redirect()->route('login')->with('error', 'Invalid credentials.');;
+        }
+        
     }
 
     /**
