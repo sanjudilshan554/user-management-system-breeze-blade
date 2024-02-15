@@ -17,6 +17,8 @@ use App\Http\Controllers\UserController;
 Route::post('/store',[UserController::class,'store'])->name('user.store');
 Route::get('/get',[UserController::class,'get'])->name('user.get');
 Route::get('/delete',[UserController::class,'delete'])->name('user.delete');
+Route::post('/update',[UserController::class,'update'])->name('user.update');
+Route::get('/find',[UserController::class,'find'])->name('user.find');
 
 Route::get('/', function () {
     return view('welcome');

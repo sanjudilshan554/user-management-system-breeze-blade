@@ -45,8 +45,9 @@ class AuthenticatedSessionController extends Controller
 
         if($user){
             $user_type= $user->user_type;
+            $status= $user->status;
 
-            if($user_type == 'admin' || $user_type == 'superadmin'){
+            if($user_type == 'admin' || $user_type == 'superadmin' || $status == 1){
                 $request->authenticate();
 
                 $request->session()->regenerate();
